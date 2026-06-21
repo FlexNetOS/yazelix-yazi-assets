@@ -3,3 +3,18 @@
 overall = { bg = "black" }
 sep_left = { open = "", close = "" }
 sep_right = { open = "", close = "" }
+
+[icon]
+prepend_files = [
+  { name = "README", text = "", fg = "#7dcfff" },
+  { name = "README.md", text = "", fg = "#7dcfff" },
+  { name = "robots.txt", text = "", fg = "#89e051" },
+  { name = "sitemap.xml", text = "", fg = "#e37933" },
+]
+prepend_exts = [
+  { name = "md", text = "", fg = "#7dcfff" },
+  { name = "markdown", text = "", fg = "#7dcfff" },
+  { name = "txt", text = "", fg = "#89e051" },
+  { name = "xml", text = "", fg = "#e37933" },
+  { name = "xslt", text = "", fg = "#33a9dc" },
+]

@@ -720,6 +720,7 @@ desc = "Open zoxide in editor"
         })
         .unwrap();
         let parsed_yazi = toml::from_str::<TomlValue>(&rendered.yazi_toml).unwrap();
+        let parsed_theme = toml::from_str::<TomlValue>(&rendered.theme_toml).unwrap();
         let parsed_keymap = toml::from_str::<TomlValue>(&rendered.keymap_toml).unwrap();
 
         assert_eq!(
@@ -765,5 +766,54 @@ desc = "Open zoxide in editor"
         assert!(rendered.init_lua.contains(starship_config_path));
         assert!(rendered.init_lua.contains("-- user init"));
         assert!(!rendered.yazi_toml.contains(RUNTIME_DIR_PLACEHOLDER));
+
+        let icon = parsed_theme
+            .get("icon")
+            .and_then(TomlValue::as_table)
+            .expect("generated theme icon table");
+        let prepend_files = icon
+            .get("prepend_files")
+            .and_then(TomlValue::as_array)
+            .expect("generated file icon overrides");
+        let prepend_exts = icon
+            .get("prepend_exts")
+            .and_then(TomlValue::as_array)
+            .expect("generated extension icon overrides");
+        assert!(has_icon(prepend_files, "README.md", ""));
+        assert!(has_icon(prepend_files, "robots.txt", ""));
+        assert!(has_icon(prepend_files, "sitemap.xml", ""));
+        assert!(has_icon(prepend_exts, "md", ""));
+        assert!(has_icon(prepend_exts, "txt", ""));
+        assert!(has_icon(prepend_exts, "xml", ""));
+    }
+
+    fn has_icon(entries: &[TomlValue], name: &str, text: &str) -> bool {
+        entries.iter().any(|entry| {
+            entry.get("name").and_then(TomlValue::as_str) == Some(name)
+                && entry.get("text").and_then(TomlValue::as_str) == Some(text)
+        })
+    }
+
+    // Defends: the bundled Yazi sidebar prompt stays icon-only without emoji-width ambiguity.
+    #[test]
+    fn bundled_starship_prompt_uses_nerd_font_symbols() {
+        let raw = include_str!("../yazelix_starship.toml");
+
+        for emoji in [
+            "📦", "🐍", "🦀", "☕", "🌙", "💎", "🐘", "🐦", "⚡", "⭐", "❄️",
+        ] {
+            assert!(
+                !raw.contains(emoji),
+                "emoji symbol leaked into sidebar Starship config: {emoji}"
+            );
+        }
+        for symbol in [
+            "󰏗", "", "", "", "", "", "", "", "", "", "", "", "", "",
+        ] {
+            assert!(
+                raw.contains(symbol),
+                "missing sidebar Starship icon: {symbol}"
+            );
+        }
     }
 }

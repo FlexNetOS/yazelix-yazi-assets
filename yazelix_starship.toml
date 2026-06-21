@@ -2,9 +2,9 @@
 # YAZELIX STARSHIP CONFIG FOR YAZI SIDEBAR
 # ========================================
 # Compact starship prompt optimized for narrow sidebar display.
-# Icons only, no versions - keeps it tight for the sidebar.
+# Nerd Font icons only, no versions - keeps it tight for the sidebar.
 #
-# Example: "yazelix[main][!?]🐍☕"
+# Example: "yazelix[main][!?]"
 # ========================================
 
 format = """
@@ -56,72 +56,72 @@ deleted = "x"
 # Package - icon only
 [package]
 format = "[$symbol]($style)"
-symbol = "📦"
+symbol = "󰏗"
 
 # Python - icon only
 [python]
 format = "[$symbol]($style)"
-symbol = "🐍"
+symbol = ""
 
 # Node.js - icon only
 [nodejs]
 format = "[$symbol]($style)"
-symbol = ""
+symbol = ""
 
 # Rust - icon only
 [rust]
 format = "[$symbol]($style)"
-symbol = "🦀"
+symbol = ""
 
 # Go - icon only
 [golang]
 format = "[$symbol]($style)"
-symbol = ""
+symbol = ""
 
 # Java - icon only
 [java]
 format = "[$symbol]($style)"
-symbol = "☕"
+symbol = ""
 
 # Lua - icon only
 [lua]
 format = "[$symbol]($style)"
-symbol = "🌙"
+symbol = ""
 
 # Ruby - icon only
 [ruby]
 format = "[$symbol]($style)"
-symbol = "💎"
+symbol = ""
 
 # PHP - icon only
 [php]
 format = "[$symbol]($style)"
-symbol = "🐘"
+symbol = ""
 
 # Kotlin - icon only
 [kotlin]
 format = "[$symbol]($style)"
-symbol = "K"
+symbol = ""
 
 # Swift - icon only
 [swift]
 format = "[$symbol]($style)"
-symbol = "🐦"
+symbol = ""
 
 # Zig - icon only
 [zig]
 format = "[$symbol]($style)"
-symbol = "⚡"
+symbol = ""
 
 # Gleam - icon only
 [gleam]
 format = "[$symbol]($style)"
-symbol = "⭐"
+symbol = ""
 
 # Nix shell - icon only, no "impure" text
 [nix_shell]
 format = "[$symbol]($style)"
-symbol = "❄️"
+symbol = ""
 
 # Disable time-based modules
 [cmd_duration]
