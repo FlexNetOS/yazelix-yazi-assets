@@ -779,12 +779,12 @@ desc = "Open zoxide in editor"
             .get("prepend_exts")
             .and_then(TomlValue::as_array)
             .expect("generated extension icon overrides");
-        assert!(has_icon(prepend_files, "README.md", ""));
-        assert!(has_icon(prepend_files, "robots.txt", ""));
-        assert!(has_icon(prepend_files, "sitemap.xml", ""));
-        assert!(has_icon(prepend_exts, "md", ""));
-        assert!(has_icon(prepend_exts, "txt", ""));
-        assert!(has_icon(prepend_exts, "xml", ""));
+        assert!(has_icon(prepend_files, "README.md", ""));
+        assert!(has_icon(prepend_files, "robots.txt", ""));
+        assert!(has_icon(prepend_files, "sitemap.xml", ""));
+        assert!(has_icon(prepend_exts, "md", ""));
+        assert!(has_icon(prepend_exts, "txt", ""));
+        assert!(has_icon(prepend_exts, "xml", ""));
     }
 
     fn has_icon(entries: &[TomlValue], name: &str, text: &str) -> bool {
