@@ -1,0 +1,23 @@
+schema_version = 1
+name = "codedb"
+kind = "nushell-runtime-tool"
+source_repo = "https://github.com/FlexNetOS/nu_plugin"
+source_rev = "37e6d2a22994308f440da1ff3cb3fda9901c9e40"
+package_input = "codedbNuPlugin"
+package_attr = "codedb_runtime_tools"
+artifact_root = "runtime_tools/codedb"
+metadata = "runtime_tools/codedb/runtime-tool-metadata.json"
+
+commands = [
+  "runtime_tools/codedb/bin/codedb",
+  "runtime_tools/codedb/bin/nu_plugin_codedb",
+]
+
+[env]
+YAZELIX_CODEDB_BIN = "runtime_tools/codedb/bin/codedb"
+YAZELIX_CODEDB_PLUGIN_BIN = "runtime_tools/codedb/bin/nu_plugin_codedb"
+
+[placement]
+mode = "runtime-tool"
+yazi_plugin = false
+note = "CodeDB is packaged as a Yazelix runtime tool artifact, not as a Yazi .yazi Lua plugin."

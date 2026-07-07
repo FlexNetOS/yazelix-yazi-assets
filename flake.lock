@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "codedbNuPlugin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783087936,
+        "narHash": "sha256-qAOON1OAG4Y6GgxXj1DJFceHI2a6BBZCIheG+ZWcUHk=",
+        "owner": "FlexNetOS",
+        "repo": "nu_plugin",
+        "rev": "37e6d2a22994308f440da1ff3cb3fda9901c9e40",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FlexNetOS",
+        "repo": "nu_plugin",
+        "rev": "37e6d2a22994308f440da1ff3cb3fda9901c9e40",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1777954456,
@@ -18,6 +39,7 @@
     },
     "root": {
       "inputs": {
+        "codedbNuPlugin": "codedbNuPlugin",
         "nixpkgs": "nixpkgs"
       }
     }
