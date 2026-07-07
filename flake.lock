@@ -3,17 +3,17 @@
     "ccboardSource": {
       "flake": false,
       "locked": {
-        "lastModified": 1782329885,
-        "narHash": "sha256-frHTCy5EkKyfqk3M3AziMCkFI5V4o+83/43DafKnGMk=",
+        "lastModified": 1783423471,
+        "narHash": "sha256-lRcwGlndsT6YMvjorkUzpokI/KynW9fkSKn2bgk/wdk=",
         "owner": "FlexNetOS",
         "repo": "ccboard",
-        "rev": "9bfda04ba28e6a6e084cf45a5baa33933885241e",
+        "rev": "fc41394e447ca02080324796fcf563ebbb7727be",
         "type": "github"
       },
       "original": {
         "owner": "FlexNetOS",
         "repo": "ccboard",
-        "rev": "9bfda04ba28e6a6e084cf45a5baa33933885241e",
+        "rev": "fc41394e447ca02080324796fcf563ebbb7727be",
         "type": "github"
       }
     },
