@@ -648,6 +648,25 @@ mod tests {
         assert_eq!(plan.resolved_theme, "dracula");
     }
 
+    // Defends: shipped default plugins are required by generated init.lua when users do not override yazi.plugins.
+    #[test]
+    fn default_plugins_include_shipped_entry_plugins() {
+        let req = sample_request();
+        let plan = compute_yazi_render_plan(&req).unwrap();
+        assert_eq!(
+            plan.init_lua.load_order,
+            vec![
+                "sidebar-status".to_string(),
+                "auto-layout".to_string(),
+                "sidebar-state".to_string(),
+                "git".to_string(),
+                "starship".to_string(),
+                "lazygit".to_string(),
+                "smart-tabs".to_string(),
+            ]
+        );
+    }
+
     // Defends: init.lua load order prepends core plugins and dedupes user entries in first-wins order.
     #[test]
     fn init_load_order_merges_core_then_user_deduped() {

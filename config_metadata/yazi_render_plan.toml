@@ -19,6 +19,8 @@ sort_by_allowed = [
 default_plugins = [
   "git",
   "starship",
+  "lazygit",
+  "smart-tabs",
 ]
 
 core_plugins = [
