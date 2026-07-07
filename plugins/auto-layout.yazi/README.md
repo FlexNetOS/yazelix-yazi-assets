@@ -22,3 +22,7 @@ require("auto-layout").setup({
    breakpoint_medium = 60,  -- new medium window threshold, defaults to 50
  })
 ```
+
+## Related
+
+Tab creation and tab switching live in `smart-tabs.yazi`. This plugin intentionally stays focused on Yazi's native parent/current/preview pane layout.

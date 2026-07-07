@@ -6,6 +6,8 @@ rust-version = "1.85"
 license = "MIT"
 description = "Reusable Yazi assets and deterministic config-pack renderer for Yazelix"
 
+[workspace]
+
 [lib]
 path = "src/lib.rs"
 

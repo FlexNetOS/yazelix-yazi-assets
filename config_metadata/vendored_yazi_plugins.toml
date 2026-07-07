@@ -23,6 +23,16 @@ managed_files = ["main.lua"]
 patch_file = "config_metadata/vendored_yazi_plugin_patches/git.yazi.patch"
 
 [[plugins]]
+name = "smart-tabs.yazi"
+ownership = "local"
+upstream_repo = ""
+tracking_ref = ""
+pinned_rev = ""
+source_subdir = "."
+target_dir = "plugins/smart-tabs.yazi"
+managed_files = ["main.lua"]
+
+[[plugins]]
 name = "lazygit.yazi"
 ownership = "upstream"
 upstream_repo = "https://github.com/Lil-Dank/lazygit.yazi.git"

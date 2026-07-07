@@ -13,6 +13,7 @@ plugins = [
   "auto-layout.yazi",
   "git.yazi",
   "lazygit.yazi",
+  "smart-tabs.yazi",
   "starship.yazi",
 ]
 

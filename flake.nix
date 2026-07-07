@@ -66,6 +66,7 @@
               test -f "$install_root/flavors/catppuccin-mocha.yazi/flavor.toml"
               test -f "$install_root/plugins/git.yazi/main.lua"
               test -f "$install_root/plugins/lazygit.yazi/main.lua"
+              test -f "$install_root/plugins/smart-tabs.yazi/main.lua"
               test -f "$install_root/plugins/starship.yazi/main.lua"
               test -f "$install_root/plugins/auto-layout.yazi/main.lua"
               test -f "$install_root/config_metadata/yazi_assets_manifest.toml"
@@ -74,6 +75,7 @@
               test -f "$install_root/config_templates/yazelix_keymap.toml"
               test -f "$install_root/config_templates/yazelix_theme.toml"
               lua -e "assert(loadfile('$install_root/plugins/lazygit.yazi/main.lua'))"
+              lua -e "assert(loadfile('$install_root/plugins/smart-tabs.yazi/main.lua'))"
 
               flavor_count="$(find "$install_root/flavors" -name flavor.toml | wc -l | tr -d ' ')"
               test "$flavor_count" = "24"
@@ -116,6 +118,7 @@
             test -d "$install_root/flavors"
             test -d "$install_root/plugins"
             test -f "$install_root/plugins/git.yazi/main.lua"
+            test -f "$install_root/plugins/smart-tabs.yazi/main.lua"
             test -f "$install_root/plugins/starship.yazi/main.lua"
             test -f "$install_root/plugins/auto-layout.yazi/main.lua"
             test -f "$install_root/config_metadata/yazi_assets_manifest.toml"

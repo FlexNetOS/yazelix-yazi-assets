@@ -769,6 +769,8 @@ desc = "Open zoxide in editor"
         assert!(rendered.init_lua.contains("require(\"starship\")"));
         assert!(rendered.init_lua.contains(starship_config_path));
         assert!(rendered.init_lua.contains("-- user init"));
+        assert!(has_keymap_run(&parsed_keymap, "plugin smart-tabs create"));
+        assert!(has_keymap_run(&parsed_keymap, "plugin smart-tabs switch 9"));
         assert!(!rendered.yazi_toml.contains(RUNTIME_DIR_PLACEHOLDER));
 
         let icon = parsed_theme
@@ -796,6 +798,18 @@ desc = "Open zoxide in editor"
             entry.get("name").and_then(TomlValue::as_str) == Some(name)
                 && entry.get("text").and_then(TomlValue::as_str) == Some(text)
         })
+    }
+
+    fn has_keymap_run(root: &TomlValue, run: &str) -> bool {
+        root.get("mgr")
+            .and_then(|section| section.get("prepend_keymap"))
+            .and_then(TomlValue::as_array)
+            .map(|entries| {
+                entries
+                    .iter()
+                    .any(|entry| entry.get("run").and_then(TomlValue::as_str) == Some(run))
+            })
+            .unwrap_or(false)
     }
 
     // Defends: the active bundled flavor carries the same rendered-safe document icons
