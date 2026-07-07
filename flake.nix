@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ccboardSource = {
-      url = "github:FlexNetOS/ccboard?rev=9bfda04ba28e6a6e084cf45a5baa33933885241e";
+      url = "github:FlexNetOS/ccboard?rev=fc41394e447ca02080324796fcf563ebbb7727be";
       flake = false;
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -67,7 +67,7 @@
               mkdir -p "$install_root/runtime_tools/ccboard/bin"
               ln -s "${ccboardPackage}/bin/ccboard" "$install_root/runtime_tools/ccboard/bin/ccboard"
               cat > "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json" <<EOF
-{"schema_version":1,"name":"ccboard","kind":"runtime-tool","source_repo":"https://github.com/FlexNetOS/ccboard","source_rev":"9bfda04ba28e6a6e084cf45a5baa33933885241e","commands":["ccboard"]}
+{"schema_version":1,"name":"ccboard","kind":"runtime-tool","source_repo":"https://github.com/FlexNetOS/ccboard","source_rev":"fc41394e447ca02080324796fcf563ebbb7727be","commands":["ccboard"]}
 EOF
               mkdir -p "$install_root/runtime_tools/codedb/bin"
               ln -s "${codedbRuntimeTools}/bin/codedb" "$install_root/runtime_tools/codedb/bin/codedb"
