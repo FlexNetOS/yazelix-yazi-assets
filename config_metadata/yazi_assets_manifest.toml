@@ -18,6 +18,7 @@ plugins = [
 ]
 
 runtime_tools = [
+  "ccboard",
   "codedb",
 ]
 
@@ -46,6 +47,14 @@ flavors = [
   "rose-pine.yazi",
   "synthwave84.yazi",
   "tokyo-night.yazi",
+]
+
+[runtime_tool_paths.ccboard]
+root = "runtime_tools/ccboard"
+metadata = "runtime_tools/ccboard/runtime-tool-metadata.json"
+manifest = "config_metadata/ccboard_runtime_tool.toml"
+commands = [
+  "runtime_tools/ccboard/bin/ccboard",
 ]
 
 [runtime_tool_paths.codedb]

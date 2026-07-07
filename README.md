@@ -10,6 +10,7 @@ This repository exists for non-Yazelix users who want the reusable Yazi pieces w
 - `plugins/git.yazi/`, `plugins/lazygit.yazi/`, and `plugins/starship.yazi/` contain reusable Yazi plugins with their upstream license files
 - `plugins/auto-layout.yazi/` contains the Yazelix-maintained Yazi auto-layout helper
 - `plugins/smart-tabs.yazi/` contains the Yazelix-maintained smart tab helper
+- `runtime_tools/ccboard/` in the built package carries the ccboard CLI from `github.com/FlexNetOS/ccboard`
 - `runtime_tools/codedb/` in the built package carries the CodeDB CLI plus `nu_plugin_codedb` from `github.com/FlexNetOS/nu_plugin`
 - `yazelix_starship.toml` contains the Starship prompt config used by the Yazi integration
 - `config_metadata/yazi_assets_manifest.toml` declares the packaged asset shape for consumers that need a stable manifest
@@ -17,7 +18,7 @@ This repository exists for non-Yazelix users who want the reusable Yazi pieces w
 
 Yazelix-specific sidebar/editor orchestration plugins remain in the main Yazelix repository because they depend on the managed pane/session contract
 
-CodeDB is packaged here as optional Yazelix runtime tooling, not as a Yazi `.yazi` Lua plugin. Its runtime manifest is installed at `config_metadata/codedb_runtime_tool.toml`, and the packaged binaries are exposed under `runtime_tools/codedb/`
+ccboard and CodeDB are packaged here as optional Yazelix runtime tooling, not as Yazi `.yazi` Lua plugins. Their runtime manifests are installed under `config_metadata/`, and the packaged binaries are exposed under `runtime_tools/`
 
 ## Nix
 

@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "ccboardSource": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1782329885,
+        "narHash": "sha256-frHTCy5EkKyfqk3M3AziMCkFI5V4o+83/43DafKnGMk=",
+        "owner": "FlexNetOS",
+        "repo": "ccboard",
+        "rev": "9bfda04ba28e6a6e084cf45a5baa33933885241e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "FlexNetOS",
+        "repo": "ccboard",
+        "rev": "9bfda04ba28e6a6e084cf45a5baa33933885241e",
+        "type": "github"
+      }
+    },
     "codedbNuPlugin": {
       "inputs": {
         "nixpkgs": [
@@ -39,6 +56,7 @@
     },
     "root": {
       "inputs": {
+        "ccboardSource": "ccboardSource",
         "codedbNuPlugin": "codedbNuPlugin",
         "nixpkgs": "nixpkgs"
       }

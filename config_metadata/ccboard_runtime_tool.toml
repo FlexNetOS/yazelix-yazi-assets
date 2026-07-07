@@ -1,0 +1,21 @@
+schema_version = 1
+name = "ccboard"
+kind = "runtime-tool"
+source_repo = "https://github.com/FlexNetOS/ccboard"
+source_rev = "9bfda04ba28e6a6e084cf45a5baa33933885241e"
+package_input = "ccboardSource"
+package_attr = "ccboard"
+artifact_root = "runtime_tools/ccboard"
+metadata = "runtime_tools/ccboard/runtime-tool-metadata.json"
+
+commands = [
+  "runtime_tools/ccboard/bin/ccboard",
+]
+
+[env]
+YAZELIX_CCBOARD_BIN = "runtime_tools/ccboard/bin/ccboard"
+
+[placement]
+mode = "runtime-tool"
+yazi_plugin = false
+note = "ccboard is packaged as a Yazelix runtime tool artifact, not as a Yazi .yazi Lua plugin."
