@@ -3,7 +3,7 @@
 
   inputs = {
     codedbNuPlugin = {
-      url = "github:FlexNetOS/nu_plugin?rev=37e6d2a22994308f440da1ff3cb3fda9901c9e40";
+      url = "github:FlexNetOS/nu_plugin?rev=532a461841316a6623701f9e206b97cafa994d40";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ccboardSource = {
