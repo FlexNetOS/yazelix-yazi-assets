@@ -24,17 +24,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1783631618,
-        "narHash": "sha256-1DZ9WyAkSvuMmbPsO55S7qlwZHVuzpVdJ7EGCw1NZtk=",
+        "lastModified": 1783644993,
+        "narHash": "sha256-2VoN3EEWUF1EF1hQwMLonrZOxKa+72YD97OzOUClmQQ=",
         "owner": "FlexNetOS",
         "repo": "nu_plugin",
-        "rev": "532a461841316a6623701f9e206b97cafa994d40",
+        "rev": "9451b20e42d79f72d4fa5b2a190a39bd1d9d5e5a",
         "type": "github"
       },
       "original": {
         "owner": "FlexNetOS",
         "repo": "nu_plugin",
-        "rev": "532a461841316a6623701f9e206b97cafa994d40",
+        "rev": "9451b20e42d79f72d4fa5b2a190a39bd1d9d5e5a",
         "type": "github"
       }
     },
