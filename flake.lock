@@ -21,20 +21,21 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1783644993,
-        "narHash": "sha256-2VoN3EEWUF1EF1hQwMLonrZOxKa+72YD97OzOUClmQQ=",
+        "lastModified": 1783970564,
+        "narHash": "sha256-OaClnusHFU+4lTFlZ6BeT/2gPW9NYtTgWyIdEesSXts=",
         "owner": "FlexNetOS",
         "repo": "nu_plugin",
-        "rev": "9451b20e42d79f72d4fa5b2a190a39bd1d9d5e5a",
+        "rev": "2c0272ca324550c684086ecc74ab4ea56fe8ef36",
         "type": "github"
       },
       "original": {
         "owner": "FlexNetOS",
         "repo": "nu_plugin",
-        "rev": "9451b20e42d79f72d4fa5b2a190a39bd1d9d5e5a",
+        "rev": "2c0272ca324550c684086ecc74ab4ea56fe8ef36",
         "type": "github"
       }
     },
@@ -59,6 +60,27 @@
         "ccboardSource": "ccboardSource",
         "codedbNuPlugin": "codedbNuPlugin",
         "nixpkgs": "nixpkgs"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "codedbNuPlugin",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783834461,
+        "narHash": "sha256-FCmrs1StAghJDKfqy56KM96KZtxpYzgeq6zM3QO8wjA=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "a286e5b998e852297a403786f063fb2c9fe7f57a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     }
   },
