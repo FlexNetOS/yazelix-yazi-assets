@@ -10,15 +10,14 @@ This repository exists for non-Yazelix users who want the reusable Yazi pieces w
 - `plugins/git.yazi/`, `plugins/lazygit.yazi/`, and `plugins/starship.yazi/` contain reusable Yazi plugins with their upstream license files
 - `plugins/auto-layout.yazi/` contains the Yazelix-maintained Yazi auto-layout helper
 - `plugins/smart-tabs.yazi/` contains the Yazelix-maintained smart tab helper
-- `runtime_tools/ccboard/` in the built package carries the ccboard CLI from `github.com/FlexNetOS/ccboard`
-- `runtime_tools/codedb/` in the built package carries the CodeDB CLI plus `nu_plugin_codedb` from `github.com/FlexNetOS/nu_plugin`
+- Linux `yazelix_yazi_assets` additionally carries the ccboard CLI and the sandboxed CodeDB CLI plus `nu_plugin_codedb`; these mandatory Foundation tools remain separate from portable Yazi assets because CodeDB's upstream Bubblewrap sandbox is Linux-only
 - `yazelix_starship.toml` contains the Starship prompt config used by the Yazi integration
 - `config_metadata/yazi_assets_manifest.toml` declares the packaged asset shape for consumers that need a stable manifest
 - `config_metadata/yazi_render_plan.toml` and `config_templates/` feed the Rust config-pack renderer
 
 Yazelix-specific sidebar/editor orchestration plugins remain in the main Yazelix repository because they depend on the managed pane/session contract
 
-ccboard and CodeDB are packaged here as optional Yazelix runtime tooling, not as Yazi `.yazi` Lua plugins. Their runtime manifests are installed under `config_metadata/`, and the packaged binaries are exposed under `runtime_tools/`
+ccboard and CodeDB are mandatory Foundation runtime tooling, not Yazi `.yazi` Lua plugins. `yazi_assets_only` (and `default`) provides the portable asset/configuration layer on every advertised platform. Linux `yazelix_yazi_assets` composes that same layer with the runtime tools, while `yazi_runtime_tools` exposes the full Linux composition for runtime consumers. The CodeDB sandbox is never weakened or emulated on Darwin.
 
 ## Nix
 
@@ -26,6 +25,12 @@ Build the package:
 
 ```bash
 nix build .#yazelix_yazi_assets
+```
+
+For the portable, cross-platform asset layer, use:
+
+```bash
+nix build .#yazi_assets_only
 ```
 
 Regenerate the checked-in Starship config:
@@ -40,7 +45,7 @@ The package installs assets under:
 share/yazelix_yazi_assets/
 ```
 
-That directory contains `flavors/`, `plugins/`, `runtime_tools/`, `config_templates/`, `yazelix_starship.toml`, and `config_metadata/`
+The portable layer contains `flavors/`, `plugins/`, `config_templates/`, `yazelix_starship.toml`, and `config_metadata/`. Linux `yazelix_yazi_assets` additionally contains `runtime_tools/`.
 
 ## Rust
 

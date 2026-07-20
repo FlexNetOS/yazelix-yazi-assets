@@ -46,9 +46,10 @@
             ];
             doCheck = false;
           };
-          codedbRuntimeTools = codedbNuPlugin.packages.${system}.codedb_runtime_tools;
-
-          assets = pkgs.stdenvNoCC.mkDerivation {
+          # Assets must evaluate on every advertised platform.  The CodeDB
+          # runtime tool deliberately remains Linux-only: its upstream package
+          # owns the Bubblewrap sandbox and must never be emulated on Darwin.
+          assetsOnly = pkgs.stdenvNoCC.mkDerivation {
             pname = "yazelix_yazi_assets";
             version = "0.1.0";
             src = pkgs.lib.cleanSource ./.;
@@ -64,15 +65,6 @@
 
               cp -R flavors "$install_root/flavors"
               cp -R plugins "$install_root/plugins"
-              mkdir -p "$install_root/runtime_tools/ccboard/bin"
-              ln -s "${ccboardPackage}/bin/ccboard" "$install_root/runtime_tools/ccboard/bin/ccboard"
-              cat > "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json" <<EOF
-{"schema_version":1,"name":"ccboard","kind":"runtime-tool","source_repo":"https://github.com/FlexNetOS/ccboard","source_rev":"f127e8a948bdd98ed57abff6759b715dfa345f1a","commands":["ccboard"]}
-EOF
-              mkdir -p "$install_root/runtime_tools/codedb/bin"
-              ln -s "${codedbRuntimeTools}/bin/codedb" "$install_root/runtime_tools/codedb/bin/codedb"
-              ln -s "${codedbRuntimeTools}/bin/nu_plugin_codedb" "$install_root/runtime_tools/codedb/bin/nu_plugin_codedb"
-              install -Dm644 "${codedbRuntimeTools}/share/codedb/runtime-tool-metadata.json" "$install_root/runtime_tools/codedb/runtime-tool-metadata.json"
               cp -R config_templates "$install_root/config_templates"
               install -Dm644 yazelix_starship.toml "$install_root/yazelix_starship.toml"
               install -Dm644 README.md "$out/share/doc/yazelix_yazi_assets/README.md"
@@ -105,13 +97,6 @@ EOF
               test -f "$install_root/plugins/smart-tabs.yazi/main.lua"
               test -f "$install_root/plugins/starship.yazi/main.lua"
               test -f "$install_root/plugins/auto-layout.yazi/main.lua"
-              test -x "$install_root/runtime_tools/ccboard/bin/ccboard"
-              test -f "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json"
-              grep -F "ccboard" "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json"
-              test -x "$install_root/runtime_tools/codedb/bin/codedb"
-              test -x "$install_root/runtime_tools/codedb/bin/nu_plugin_codedb"
-              test -f "$install_root/runtime_tools/codedb/runtime-tool-metadata.json"
-              grep -F "nu_plugin_codedb" "$install_root/runtime_tools/codedb/runtime-tool-metadata.json"
               test -f "$install_root/config_metadata/ccboard_runtime_tool.toml"
               test -f "$install_root/config_metadata/codedb_runtime_tool.toml"
               test -f "$install_root/config_metadata/yazi_assets_manifest.toml"
@@ -135,21 +120,61 @@ EOF
               manifestPath = "share/yazelix_yazi_assets/config_metadata/yazi_assets_manifest.toml";
               pluginsPath = "share/yazelix_yazi_assets/plugins";
               renderPlanMetadataPath = "share/yazelix_yazi_assets/config_metadata/yazi_render_plan.toml";
-              runtimeToolsPath = "share/yazelix_yazi_assets/runtime_tools";
-              ccboardRuntimeToolMetadataPath = "share/yazelix_yazi_assets/runtime_tools/ccboard/runtime-tool-metadata.json";
-              codedbRuntimeToolMetadataPath = "share/yazelix_yazi_assets/runtime_tools/codedb/runtime-tool-metadata.json";
             };
 
             meta = {
-              description = "Reusable Yazi flavor, plugin, and runtime tool assets from Yazelix";
+              description = "Cross-platform reusable Yazi flavor, plugin, and configuration assets from Yazelix";
               license = pkgs.lib.licenses.mit;
               platforms = systems;
             };
           };
+
+          runtimeTools =
+            if pkgs.stdenv.hostPlatform.isLinux then
+              pkgs.stdenvNoCC.mkDerivation {
+                pname = "yazelix_yazi_runtime_tools";
+                version = "0.1.0";
+                dontUnpack = true;
+                dontConfigure = true;
+                dontBuild = true;
+                installPhase = ''
+                  install_root="$out/share/yazelix_yazi_assets/runtime_tools"
+                  mkdir -p "$install_root/ccboard/bin" "$install_root/codedb/bin"
+                  ln -s "${ccboardPackage}/bin/ccboard" "$install_root/ccboard/bin/ccboard"
+                  cat > "$install_root/ccboard/runtime-tool-metadata.json" <<EOF
+{"schema_version":1,"name":"ccboard","kind":"runtime-tool","source_repo":"https://github.com/FlexNetOS/ccboard","source_rev":"f127e8a948bdd98ed57abff6759b715dfa345f1a","commands":["ccboard"]}
+EOF
+                  ln -s "${codedbNuPlugin.packages.${system}.codedb_runtime_tools}/bin/codedb" "$install_root/codedb/bin/codedb"
+                  ln -s "${codedbNuPlugin.packages.${system}.codedb_runtime_tools}/bin/nu_plugin_codedb" "$install_root/codedb/bin/nu_plugin_codedb"
+                  install -Dm644 "${codedbNuPlugin.packages.${system}.codedb_runtime_tools}/share/codedb/runtime-tool-metadata.json" "$install_root/codedb/runtime-tool-metadata.json"
+                '';
+              }
+            else
+              null;
+
+          assetsWithRuntimeTools =
+            if pkgs.stdenv.hostPlatform.isLinux then
+              pkgs.symlinkJoin {
+                name = "yazelix_yazi_assets";
+                paths = [ assetsOnly runtimeTools ];
+                passthru = assetsOnly.passthru // {
+                  runtimeToolsPath = "share/yazelix_yazi_assets/runtime_tools";
+                  ccboardRuntimeToolMetadataPath = "share/yazelix_yazi_assets/runtime_tools/ccboard/runtime-tool-metadata.json";
+                  codedbRuntimeToolMetadataPath = "share/yazelix_yazi_assets/runtime_tools/codedb/runtime-tool-metadata.json";
+                };
+                meta = assetsOnly.meta // {
+                  description = "Linux Yazi assets with mandatory ccboard and sandboxed CodeDB runtime tools";
+                };
+              }
+            else
+              null;
         in
         {
-          default = assets;
-          yazelix_yazi_assets = assets;
+          default = assetsOnly;
+          yazi_assets_only = assetsOnly;
+        } // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          yazelix_yazi_assets = assetsWithRuntimeTools;
+          yazi_runtime_tools = assetsWithRuntimeTools;
         }
       );
 
@@ -157,7 +182,7 @@ EOF
         system:
         let
           pkgs = import nixpkgs { inherit system; };
-          package = self.packages.${system}.yazelix_yazi_assets;
+          package = self.packages.${system}.yazi_assets_only;
         in
         {
           install = package;
@@ -169,6 +194,16 @@ EOF
             test -f "$install_root/plugins/smart-tabs.yazi/main.lua"
             test -f "$install_root/plugins/starship.yazi/main.lua"
             test -f "$install_root/plugins/auto-layout.yazi/main.lua"
+            test -f "$install_root/config_metadata/ccboard_runtime_tool.toml"
+            test -f "$install_root/config_metadata/codedb_runtime_tool.toml"
+            test -f "$install_root/config_metadata/yazi_assets_manifest.toml"
+            test -f "$install_root/config_metadata/yazi_render_plan.toml"
+            test -f "$install_root/config_templates/yazelix_yazi.toml"
+            touch "$out"
+          '';
+        } // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          runtime_tool_shape = pkgs.runCommand "yazelix-yazi-runtime-tools-shape" { } ''
+            install_root="${self.packages.${system}.yazi_runtime_tools}/share/yazelix_yazi_assets"
             test -x "$install_root/runtime_tools/ccboard/bin/ccboard"
             test -f "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json"
             ${pkgs.gnugrep}/bin/grep -F "ccboard" "$install_root/runtime_tools/ccboard/runtime-tool-metadata.json"
@@ -176,11 +211,6 @@ EOF
             test -x "$install_root/runtime_tools/codedb/bin/nu_plugin_codedb"
             test -f "$install_root/runtime_tools/codedb/runtime-tool-metadata.json"
             ${pkgs.gnugrep}/bin/grep -F "nu_plugin_codedb" "$install_root/runtime_tools/codedb/runtime-tool-metadata.json"
-            test -f "$install_root/config_metadata/ccboard_runtime_tool.toml"
-            test -f "$install_root/config_metadata/codedb_runtime_tool.toml"
-            test -f "$install_root/config_metadata/yazi_assets_manifest.toml"
-            test -f "$install_root/config_metadata/yazi_render_plan.toml"
-            test -f "$install_root/config_templates/yazelix_yazi.toml"
             touch "$out"
           '';
         }
