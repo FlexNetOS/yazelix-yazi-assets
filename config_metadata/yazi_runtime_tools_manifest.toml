@@ -1,0 +1,31 @@
+schema_version = 1
+assets_root = "share/yazelix_yazi_assets"
+
+# Linux-only Foundation runtime tools. This manifest is installed exclusively by
+# the Linux `yazelix_yazi_assets` composition (portable assets + runtime tools).
+# It is never present in the portable `yazi_assets_only` layer, whose own
+# manifest sets `runtime_tools_available = false`. CodeDB retains its upstream
+# Bubblewrap sandbox and is never emulated on Darwin.
+runtime_tools_available = true
+
+runtime_tools = [
+  "ccboard",
+  "codedb",
+]
+
+[runtime_tool_paths.ccboard]
+root = "runtime_tools/ccboard"
+metadata = "runtime_tools/ccboard/runtime-tool-metadata.json"
+manifest = "config_metadata/ccboard_runtime_tool.toml"
+commands = [
+  "runtime_tools/ccboard/bin/ccboard",
+]
+
+[runtime_tool_paths.codedb]
+root = "runtime_tools/codedb"
+metadata = "runtime_tools/codedb/runtime-tool-metadata.json"
+manifest = "config_metadata/codedb_runtime_tool.toml"
+commands = [
+  "runtime_tools/codedb/bin/codedb",
+  "runtime_tools/codedb/bin/nu_plugin_codedb",
+]

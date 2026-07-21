@@ -3,6 +3,15 @@ assets_root = "share/yazelix_yazi_assets"
 starship_config = "yazelix_starship.toml"
 render_plan_metadata = "config_metadata/yazi_render_plan.toml"
 
+# Portable layer: cross-platform Yazi flavor, plugin, and configuration assets
+# only. Foundation runtime tools (ccboard, CodeDB) are a Linux-only concern
+# because CodeDB owns an upstream Bubblewrap sandbox that is never emulated on
+# Darwin. Their availability is modeled explicitly by the separate
+# `yazi_runtime_tools_manifest.toml`, which is present only in the Linux
+# `yazelix_yazi_assets` composition. The portable layer therefore makes no
+# runtime-tool claims.
+runtime_tools_available = false
+
 config_templates = [
   "yazelix_keymap.toml",
   "yazelix_theme.toml",
@@ -15,11 +24,6 @@ plugins = [
   "lazygit.yazi",
   "smart-tabs.yazi",
   "starship.yazi",
-]
-
-runtime_tools = [
-  "ccboard",
-  "codedb",
 ]
 
 flavors = [
@@ -47,21 +51,4 @@ flavors = [
   "rose-pine.yazi",
   "synthwave84.yazi",
   "tokyo-night.yazi",
-]
-
-[runtime_tool_paths.ccboard]
-root = "runtime_tools/ccboard"
-metadata = "runtime_tools/ccboard/runtime-tool-metadata.json"
-manifest = "config_metadata/ccboard_runtime_tool.toml"
-commands = [
-  "runtime_tools/ccboard/bin/ccboard",
-]
-
-[runtime_tool_paths.codedb]
-root = "runtime_tools/codedb"
-metadata = "runtime_tools/codedb/runtime-tool-metadata.json"
-manifest = "config_metadata/codedb_runtime_tool.toml"
-commands = [
-  "runtime_tools/codedb/bin/codedb",
-  "runtime_tools/codedb/bin/nu_plugin_codedb",
 ]
