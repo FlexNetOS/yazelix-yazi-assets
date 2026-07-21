@@ -64,11 +64,11 @@ binary assets. Regenerate with:
 | TOML (flavors, config templates, manifests) | 5,194 |
 | Rust (render-plan / config-pack crate) | 1,054 |
 | Lua (Yazi plugins) | 940 |
-| Markdown (docs) | 567 |
+| Markdown (docs) | 615 |
 | Vendored plugin patch | 310 |
 | Nix (flake) | 270 |
 | Licenses / other tracked text | 300 |
-| **Total tracked text** | **8,635** |
+| **Total tracked text** | **8,683** |
 
 ## Rust
 
