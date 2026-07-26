@@ -1,0 +1,156 @@
+schema_version = 1
+default_light = "catppuccin-latte"
+
+[flavors.ashen]
+mode = "dark"
+repository = "https://github.com/ficd0/ashen"
+revision = "2da901f3ce7f233c7a2437cb2b824afd2a01f2aa"
+source_subdir = "ashen.yazi"
+license = "MIT"
+
+[flavors.ayu-dark]
+mode = "dark"
+repository = "https://github.com/kmlupreti/ayu-dark.yazi"
+revision = "00804daeffe723719a404f72d1c3350751468c61"
+source_subdir = "."
+license = "MIT"
+
+[flavors.bluloco-dark]
+mode = "dark"
+repository = "https://github.com/hankertrix/bluloco-yazi"
+revision = "1570591330ba2a3e717e784f8151168c2e2ff89a"
+source_subdir = "bluloco-dark.yazi"
+license = "LGPL-3.0-only"
+
+[flavors.bluloco-light]
+mode = "light"
+repository = "https://github.com/hankertrix/bluloco-yazi"
+revision = "1570591330ba2a3e717e784f8151168c2e2ff89a"
+source_subdir = "bluloco-light.yazi"
+license = "LGPL-3.0-only"
+
+[flavors.catppuccin-frappe]
+mode = "dark"
+repository = "https://github.com/yazi-rs/flavors"
+revision = "4770a3467169bfdb0a3b11601921aaf27c100630"
+source_subdir = "catppuccin-frappe.yazi"
+license = "MIT"
+
+[flavors.catppuccin-latte]
+mode = "light"
+repository = "https://github.com/yazi-rs/flavors"
+revision = "4770a3467169bfdb0a3b11601921aaf27c100630"
+source_subdir = "catppuccin-latte.yazi"
+license = "MIT"
+
+[flavors.catppuccin-macchiato]
+mode = "dark"
+repository = "https://github.com/yazi-rs/flavors"
+revision = "4770a3467169bfdb0a3b11601921aaf27c100630"
+source_subdir = "catppuccin-macchiato.yazi"
+license = "MIT"
+
+[flavors.catppuccin-mocha]
+mode = "dark"
+repository = "https://github.com/yazi-rs/flavors"
+revision = "4770a3467169bfdb0a3b11601921aaf27c100630"
+source_subdir = "catppuccin-mocha.yazi"
+license = "MIT"
+
+[flavors.dracula]
+mode = "dark"
+repository = "https://github.com/yazi-rs/flavors"
+revision = "4770a3467169bfdb0a3b11601921aaf27c100630"
+source_subdir = "dracula.yazi"
+license = "MIT"
+
+[flavors.everforest-medium]
+mode = "dark"
+repository = "https://github.com/Chromium-3-Oxide/everforest-medium.yazi"
+revision = "e1ead7b5a3bfc8eb572fd269a369775842752705"
+source_subdir = "."
+license = "MIT"
+
+[flavors.flexoki-dark]
+mode = "dark"
+repository = "https://github.com/gosxrgxx/flexoki-dark.yazi"
+revision = "25d28ce199a5189dbad5d17a526d0ebdece63532"
+source_subdir = "."
+license = "MIT"
+
+[flavors.flexoki-light]
+mode = "light"
+repository = "https://github.com/gosxrgxx/flexoki-light.yazi"
+revision = "1b1e67795a3eeec51aec0be74b3d76316be9aaa1"
+source_subdir = "."
+license = "MIT"
+
+[flavors.gruvbox-dark]
+mode = "dark"
+repository = "https://github.com/bennyyip/gruvbox-dark.yazi"
+revision = "619fdc5844db0c04f6115a62cf218e707de2821e"
+source_subdir = "."
+license = "MIT"
+
+[flavors.kanagawa]
+mode = "dark"
+repository = "https://github.com/dangooddd/kanagawa.yazi"
+revision = "04985d12842b06bdb3ad5f1b3d7abc631059b7f5"
+source_subdir = "."
+license = "MIT"
+
+[flavors.kanagawa-dragon]
+mode = "dark"
+repository = "https://github.com/marcosvnmelo/kanagawa-dragon.yazi"
+revision = "b433f4a9784aa2622471db2fd3236c272ce57f11"
+source_subdir = "."
+license = "MIT"
+
+[flavors.kanagawa-lotus]
+mode = "light"
+repository = "https://github.com/muratoffalex/kanagawa-lotus.yazi"
+revision = "adc1be6a47bb51514c3ac2f8d2181f7d5a269b5b"
+source_subdir = "."
+license = "MIT"
+
+[flavors.nord]
+mode = "dark"
+repository = "https://github.com/AdithyanA2005/nord.yazi"
+revision = "34970be5358d2bf740ff8bf54bd88a4a9fa9d537"
+source_subdir = "."
+license = "MIT"
+
+[flavors.rose-pine]
+mode = "dark"
+repository = "https://github.com/Mintass/rose-pine.yazi"
+revision = "d91f8f2ef53b5ba4edb455164b1570f9c3a8341a"
+source_subdir = "."
+license = "MIT"
+
+[flavors.rose-pine-dawn]
+mode = "light"
+repository = "https://github.com/Mintass/rose-pine-dawn.yazi"
+revision = "d82f54f7c646352dc03bfc5cb5c849afaf5b8b79"
+source_subdir = "."
+license = "MIT"
+
+[flavors.rose-pine-moon]
+mode = "dark"
+repository = "https://github.com/Mintass/rose-pine-moon.yazi"
+revision = "94385fe2e73adfb14c0305823a3538660636b52b"
+source_subdir = "."
+license = "MIT"
+
+[flavors.synthwave84]
+mode = "dark"
+repository = "https://github.com/CFY98/synthwave84.yazi"
+revision = "b7bb92e406f6575979ed8fa8e602601620017d5f"
+source_subdir = "."
+license = "MIT"
+
+[flavors.tokyo-night]
+mode = "dark"
+repository = "https://github.com/BennyOe/tokyo-night.yazi"
+revision = "8e6296f14daff24151c736ebd0b9b6cd89b02b03"
+source_subdir = "."
+license = "MIT"

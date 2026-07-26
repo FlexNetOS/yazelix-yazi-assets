@@ -1,51 +1,80 @@
-# yazelix-yazi-assets
+# yazi-bistro
 
-Standalone Yazi flavor and plugin assets extracted from Yazelix
+A curated tasting menu of complete dark and light
+[Yazi flavors](https://yazi-rs.github.io/docs/flavors/overview/)
 
-This repository exists for non-Yazelix users who want the reusable Yazi pieces without adopting the full Yazelix runtime. Regular Yazelix users do not need to install or configure this package directly; Yazelix wires it into the managed runtime
+The catalog grew out of Yazelix but is packaged for any Yazi user. Each flavor
+is pinned to an upstream revision and includes `flavor.toml`, `tmtheme.xml`,
+`LICENSE`, and `LICENSE-tmtheme`. `catalog.toml` records provenance, license,
+and dark/light classification.
 
-## Contents
-
-- `flavors/` contains the bundled Yazelix Yazi flavor catalog
-- `plugins/git.yazi/`, `plugins/lazygit.yazi/`, and `plugins/starship.yazi/` contain reusable Yazi plugins with their upstream license files
-- `plugins/auto-layout.yazi/` contains the Yazelix-maintained Yazi auto-layout helper
-- `yazelix_starship.toml` mirrors Starship's contextual prompt modules for Yazi, keeping directory and Git text while rendering other decorations as icons
-- `config_metadata/yazi_assets_manifest.toml` declares the packaged asset shape for consumers that need a stable manifest
-- `config_metadata/yazi_render_plan.toml` and `config_templates/` feed the Rust config-pack renderer
-
-Yazelix-specific sidebar/editor orchestration plugins remain in the main Yazelix repository because they depend on the managed pane/session contract
+Catppuccin Latte is the catalog's recommended light default. The collection is
+deliberately broader than its defaults: a flavor may be expressive or
+opaque-backed and still belong in the catalog when it is compatible, complete,
+licensed, distinct, and readable in its intended mode.
 
 ## Nix
 
-Build the package:
+Build the complete catalog:
 
-```bash
-nix build .#yazelix_yazi_assets
+```sh
+nix build
 ```
 
-Regenerate the checked-in Starship config:
+Build one flavor:
 
-```bash
-cargo run --bin generate_yazelix_starship > yazelix_starship.toml
+```sh
+nix build .#catppuccin-latte
 ```
 
-The package installs assets under:
+The aggregate package installs flavor directories and the catalog under:
 
 ```text
-share/yazelix_yazi_assets/
+share/yazi-flavors/
 ```
 
-That directory contains `flavors/`, `plugins/`, `config_templates/`, `yazelix_starship.toml`, and `config_metadata/`
+With Home Manager, select any individual package:
 
-## Rust
-
-The `yazelix_yazi_assets` crate exposes pure render-plan and config-pack functions:
-
-```rust
-use yazelix_yazi_assets::{
-    YaziConfigPackRenderRequest, YaziConfigPackTemplates, compute_yazi_render_plan,
-    render_yazi_config_pack,
+```nix
+programs.yazi = {
+  enable = true;
+  flavors = {
+    inherit (inputs.yazi-bistro.packages.${pkgs.system})
+      catppuccin-latte
+      dracula;
+  };
+  theme.flavor = {
+    dark = "dracula";
+    light = "catppuccin-latte";
+  };
 };
 ```
 
-The crate renders file contents from explicit inputs. It does not read user config paths, generated state directories, host environment variables, or a Yazelix checkout
+## Inclusion policy
+
+A flavor is included only when:
+
+- its pinned package parses with the catalog's current Yazi validation target;
+- its runtime theme and syntax theme are complete and carry usable licenses;
+- its upstream revision and source path are reproducible;
+- its intended mode remains readable across Yazi's main surfaces;
+- it contributes a distinct option without repository-local theme patches.
+
+Popularity, a matching dark/light companion, active development, and terminal
+background transparency are not catalog requirements. Defaults use a stricter
+bar for contrast, transparency, broad appeal, provenance, and fit with the
+surrounding runtime.
+
+## LOC scorecard
+
+Counts tracked text files and excludes `flake.lock`.
+
+| Language | Lines |
+| --- | ---: |
+| Nix | 116 |
+| TOML | 4,763 |
+| XML syntax themes | 26,335 |
+| Markdown | 141 |
+| Licenses | 1,694 |
+| Ignore files | 4 |
+| Total | 33,053 |

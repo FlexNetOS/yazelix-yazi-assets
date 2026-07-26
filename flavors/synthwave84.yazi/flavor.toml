@@ -14,10 +14,6 @@
 [mgr]
 cwd = { fg = "#848bbd" }
 
-# Hovered
-hovered         = { reversed = true }
-preview_hovered = { underline = true }
-
 # Find
 find_keyword  = { fg = "#848bbd", bg = "#262335", bold = true, italic = true }
 find_position = { fg = "#848bbd", bg = "#262335", bold = true }
@@ -39,6 +35,13 @@ border_style  = { fg = "#848bbd" }
 
 # : }}}
 
+# : Indicator {{{
+
+[indicator]
+current = { reversed = true }
+preview = { underline = true }
+
+# : }}}
 
 # : Tabs {{{
 
@@ -103,7 +106,7 @@ separator_style = { fg = "#848bbd" }
 [confirm]
 border     = { fg = "#848bbd" }
 title      = { fg = "#fe4450", underline = true }
-content    = { fg = "#848bbd" }
+body	   = { fg = "#848bbd" }
 list       = {}
 btn_yes    = { fg = "#ff7edb", underline = true }
 btn_no     = { fg = "#ff7edb", underline = true }
@@ -199,11 +202,46 @@ rules = [
 	# Archive
 	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "#ff7edb" },
 	{ url = "*.img", fg = "#ff7edb" },
+	# Visual file system
+	{ mime = "vfs/{absent,stale}", fg = "#848bbd" },
 	# Fallback
 	{ url = "*" },
 	{ url = "*/", fg = "#848bbd" },
-	{ url = "*" },
-	{ url = "*/", fg = "#848bbd" }
 ]
 
 # : }}}
+
+[icon]# {{{
+
+dirs = [
+	{ name = ".config", text = "", fg = "#ff7edb" },
+	{ name = ".git", text = "", fg = "#72f1b8" },
+	{ name = ".github", text = "", fg = "#848bbd" },
+	{ name = ".npm", text = "", fg = "#848bbd" },
+	{ name = "Desktop", text = "", fg = "#72f1b8" },
+	{ name = "Development", text = "", fg = "#72f1b8" },
+	{ name = "Documents", text = "", fg = "#72f1b8" },
+	{ name = "Downloads", text = "", fg = "#72f1b8" },
+	{ name = "Library", text = "󰟞", fg = "#72f1b8" },
+	{ name = "Movies", text = "", fg = "#72f1b8" },
+	{ name = "Music", text = "", fg = "#72f1b8" },
+	{ name = "Pictures", text = "", fg = "#72f1b8" },
+	{ name = "Public", text = "", fg = "#72f1b8" },
+	{ name = "Videos", text = "", fg = "#72f1b8" },
+]
+conds = [
+	# Special files
+	{ if = "orphan", text = "", fg = "#fe4450" },
+	{ if = "link", text = "", fg = "#848bbd" },
+	{ if = "block", text = "", fg = "#ff8b39" },
+	{ if = "char", text = "", fg = "#ff8b39" },
+	{ if = "fifo", text = "", fg = "#ff8b39" },
+	{ if = "sock", text = "", fg = "#ff8b39" },
+	{ if = "sticky", text = "", fg = "#ff8b39" },
+	{ if = "dummy", text = "", fg = "#fe4450" },
+	# Fallback
+	{ if = "dir & hovered", text = "", fg = "#848bbd" },
+	{ if = "dir", text = "", fg = "#848bbd" },
+	{ if = "exec", text = "", fg = "#72f1b8" },
+	{ if = "!dir", text = "", fg = "#36f9f6" },
+]# }}}
