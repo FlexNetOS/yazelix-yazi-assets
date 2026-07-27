@@ -8,7 +8,7 @@ is pinned to an upstream revision and includes `flavor.toml`, `tmtheme.xml`,
 `LICENSE`, and `LICENSE-tmtheme`. `catalog.toml` records provenance, license,
 and dark/light classification.
 
-Catppuccin Latte is the catalog's recommended light default. The collection is
+Bluloco Light is the catalog's recommended light default. The collection is
 deliberately broader than its defaults: a flavor may be expressive or
 opaque-backed and still belong in the catalog when it is compatible, complete,
 licensed, distinct, and readable in its intended mode.
@@ -24,7 +24,7 @@ nix build
 Build one flavor:
 
 ```sh
-nix build .#catppuccin-latte
+nix build .#bluloco-light
 ```
 
 The aggregate package installs flavor directories and the catalog under:
@@ -40,12 +40,12 @@ programs.yazi = {
   enable = true;
   flavors = {
     inherit (inputs.yazi-bistro.packages.${pkgs.system})
-      catppuccin-latte
+      bluloco-light
       dracula;
   };
   theme.flavor = {
     dark = "dracula";
-    light = "catppuccin-latte";
+    light = "bluloco-light";
   };
 };
 ```

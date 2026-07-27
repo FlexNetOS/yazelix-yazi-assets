@@ -1,5 +1,5 @@
 schema_version = 1
-default_light = "catppuccin-latte"
+default_light = "bluloco-light"
 
 [flavors.ashen]
 mode = "dark"
